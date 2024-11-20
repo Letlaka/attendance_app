@@ -1,0 +1,27 @@
+{% extends "empowerworks_app/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h2>Your Leave Requests</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Dates</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for request in leave_requests %}
+        <tr>
+            <td>{{ request.get_leave_type_display }}</td>
+            <td>{{ request.start_date }} to {{ request.end_date }}</td>
+            <td>{{ request.get_status_display }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">No leave requests found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

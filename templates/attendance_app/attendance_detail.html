@@ -1,0 +1,13 @@
+{% extends "empowerworks_app/base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Attendance Details</h2>
+    <p><strong>Employee:</strong> {{ attendance_record.employee.full_name }}</p>
+    <p><strong>Date:</strong> {{ attendance_record.date }}</p>
+    <p><strong>Check-in Time:</strong> {{ attendance_record.check_in_time|default:"-" }}</p>
+    <p><strong>Check-out Time:</strong> {{ attendance_record.check_out_time|default:"-" }}</p>
+    <p><strong>Status:</strong> {{ attendance_record.get_status_display }}</p>
+    <p><strong>Remarks:</strong> {{ attendance_record.remarks|default:"None" }}</p>
+    <a href="{% url 'attendance_app:attendance_list' %}" class="btn btn-secondary">Back</a>
+</div>
+{% endblock %}

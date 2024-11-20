@@ -1,0 +1,31 @@
+{% extends "empowerworks_app/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h2>Leave Requests Pending Approval</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Employee</th>
+            <th>Type</th>
+            <th>Dates</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for request in leave_requests %}
+        <tr>
+            <td>{{ request.employee.full_name }}</td>
+            <td>{{ request.leave_type.get_leave_type_display }}</td>
+            <td>{{ request.start_date }} to {{ request.end_date }}</td>
+            <td>
+                <a href="{% url 'attendance_app:leave_request_approve' request.pk %}" class="btn btn-success">Approve</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No pending leave requests.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
